@@ -79,14 +79,34 @@ docker run -e AUTHORIZATION_KEY=your-secret-key -p 3000:3000 mcp-server
 
 ### Calculator（`/mcp/calculator`）
 
-数学计算器，提供基础算术运算。
+数学表达式计算器，支持多种运算符和函数。
 
-| 方法       | 说明           | 参数                     |
-| ---------- | -------------- | ------------------------ |
-| `add`      | 计算两个数的和 | `a`: number, `b`: number |
-| `subtract` | 计算两个数的差 | `a`: number, `b`: number |
-| `multiply` | 计算两个数的积 | `a`: number, `b`: number |
-| `divide`   | 计算两个数的商 | `a`: number, `b`: number |
+| 方法       | 说明             | 参数                 |
+| ---------- | ---------------- | -------------------- |
+| `evaluate` | 计算数学表达式   | `expression`: string |
+
+**支持的运算符：**
+- 算术运算：`+`, `-`, `*`, `/`
+- 整除：`//`
+- 取模：`%`
+- 幂运算：`**` 或 `^`
+
+**支持的常量：** `pi`, `e`
+
+**支持的函数：** `sin`, `cos`, `tan`, `sqrt`, `abs`, `log`, `log10`, `exp`, `floor`, `ceil`, `round`, `pow`, `min`, `max`
+
+**示例：**
+```
+2 + 3 * 4        → 14
+(2 + 3) * 4      → 20
+2^10             → 1024
+sqrt(16)         → 4
+2 * pi           → 6.283...
+sin(0)           → 0
+pow(2, 8)        → 256
+17 // 5          → 3
+17 % 5           → 2
+```
 
 ### Echo（`/mcp/echo`）
 

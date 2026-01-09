@@ -80,14 +80,34 @@ docker run -e AUTHORIZATION_KEY=your-secret-key -p 3000:3000 mcp-server
 
 ### Calculator (`/mcp/calculator`)
 
-Math calculator providing basic arithmetic operations.
+Math expression evaluator supporting various operators and functions.
 
-| Method     | Description                         | Parameters               |
-| ---------- | ----------------------------------- | ------------------------ |
-| `add`      | Calculate sum of two numbers        | `a`: number, `b`: number |
-| `subtract` | Calculate difference of two numbers | `a`: number, `b`: number |
-| `multiply` | Calculate product of two numbers    | `a`: number, `b`: number |
-| `divide`   | Calculate quotient of two numbers   | `a`: number, `b`: number |
+| Method     | Description                    | Parameters             |
+| ---------- | ------------------------------ | ---------------------- |
+| `evaluate` | Evaluate a math expression     | `expression`: string   |
+
+**Supported Operators:**
+- Arithmetic: `+`, `-`, `*`, `/`
+- Floor Division: `//`
+- Modulo: `%`
+- Power: `**` or `^`
+
+**Supported Constants:** `pi`, `e`
+
+**Supported Functions:** `sin`, `cos`, `tan`, `sqrt`, `abs`, `log`, `log10`, `exp`, `floor`, `ceil`, `round`, `pow`, `min`, `max`
+
+**Examples:**
+```
+2 + 3 * 4        → 14
+(2 + 3) * 4      → 20
+2^10             → 1024
+sqrt(16)         → 4
+2 * pi           → 6.283...
+sin(0)           → 0
+pow(2, 8)        → 256
+17 // 5          → 3
+17 % 5           → 2
+```
 
 ### Echo (`/mcp/echo`)
 
