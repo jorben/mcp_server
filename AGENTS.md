@@ -34,12 +34,23 @@ npm test
 # Run tests in watch mode
 npm run test:watch
 
+# Run tests with coverage
+npm test -- --coverage
+
 # Run a single test file
 npx vitest run src/tools/echo/index.test.ts
 
 # Run tests matching a pattern
 npx vitest run -t "echo"
 ```
+
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `3000` | Server port |
+| `HOST` | `0.0.0.0` | Server host |
+| `AUTHORIZATION_KEY` | - | Bearer token for API authentication (optional) |
 
 ## Code Style Guidelines
 
@@ -48,7 +59,7 @@ npx vitest run -t "echo"
 - Target: ES2022
 - Module: NodeNext
 - Strict mode enabled
-- Always use explicit return types for functions
+- Explicit return types: Off (optional, but recommended for public APIs)
 - Use `unknown` instead of `any` when type is uncertain
 
 ### Naming Conventions
@@ -140,7 +151,7 @@ export default myTool;
 
 ### Code Organization
 
-- `src/core/`: Core framework (registry, loader)
+- `src/core/`: Core framework (registry, loader, executor)
 - `src/tools/`: Tool implementations (each in its own directory)
 - `src/types/`: TypeScript interfaces and types
 - `src/utils/`: Utility functions
@@ -150,7 +161,7 @@ export default myTool;
 ### Linting Rules
 
 - Unused variables: Error (except `_` prefix)
-- Explicit return types: Optional (recommended)
+- Explicit return types: Off (optional)
 - `any` type: Warning (avoid when possible)
 - Semicolons: Required
 - Quotes: Single quotes preferred
