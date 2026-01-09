@@ -2,11 +2,11 @@ import { z } from 'zod';
 import { MCPTool, MCPMethodDefinition } from '../../types/mcp.js';
 
 /**
- * 时间工具 - 提供时区转换和时间格式化功能
+ * Time Tool - Provides timezone conversion and time formatting
  */
 const timeTool: MCPTool = {
   name: 'time',
-  description: '时间工具，提供获取当前时间、时区转换和时间格式化功能',
+  description: 'Time tool providing current time retrieval, timezone conversion, and time formatting',
   version: '1.0.0',
 
   getMethods(): MCPMethodDefinition[] {
@@ -52,32 +52,32 @@ const timeTool: MCPTool = {
             time: string;
           };
 
-          // 解析时间
+          // Parse time
           const [hours, minutes] = time.split(':').map(Number);
           if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
             throw new Error('Invalid time value');
           }
 
-          // 验证时区有效性
+          // Validate timezones
           validateTimezone(source_timezone);
           validateTimezone(target_timezone);
 
-          // 使用今天的日期作为基准
+          // Use today's date as reference
           const today = new Date();
           const year = today.getFullYear();
           const month = today.getMonth();
           const day = today.getDate();
 
-          // 创建一个基准时间点（使用 UTC）
+          // Create a base time point (using UTC)
           const baseDate = new Date(Date.UTC(year, month, day, hours, minutes, 0));
 
-          // 获取源时区的偏移量
+          // Get source timezone offset
           const sourceOffset = getTimezoneOffsetMinutes(source_timezone, baseDate);
 
-          // 计算 UTC 时间：源时区时间 - 源时区偏移 = UTC 时间
+          // Calculate UTC time: source time - source offset = UTC time
           const utcTime = new Date(baseDate.getTime() - sourceOffset * 60000);
 
-          // 格式化为目标时区
+          // Format to target timezone
           const targetFormatted = formatDateInTimezone(utcTime, target_timezone);
           const [targetDate, targetTime] = targetFormatted.split(' ');
 
@@ -133,11 +133,11 @@ const timeTool: MCPTool = {
   },
 
   async initialize() {
-    // 无需初始化
+    // No initialization required
   },
 
   async healthCheck() {
-    // 验证时区功能可用
+    // Verify timezone functionality is available
     try {
       new Intl.DateTimeFormat('en-US', { timeZone: 'Etc/UTC' }).format(new Date());
       return true;
@@ -148,7 +148,7 @@ const timeTool: MCPTool = {
 };
 
 /**
- * 验证时区是否有效
+ * Validate if timezone is valid
  */
 function validateTimezone(timezone: string): void {
   try {
@@ -159,7 +159,7 @@ function validateTimezone(timezone: string): void {
 }
 
 /**
- * 格式化日期为指定时区的字符串
+ * Format date to string in specified timezone
  */
 function formatDateInTimezone(date: Date, timezone: string): string {
   const formatter = new Intl.DateTimeFormat('en-CA', {
@@ -180,7 +180,7 @@ function formatDateInTimezone(date: Date, timezone: string): string {
 }
 
 /**
- * 获取指定时区相对于 UTC 的偏移量（分钟）
+ * Get timezone offset in minutes relative to UTC
  */
 function getTimezoneOffsetMinutes(timezone: string, date: Date): number {
   const utcStr = date.toLocaleString('en-US', { timeZone: 'UTC' });

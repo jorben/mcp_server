@@ -13,7 +13,7 @@ describe('Calculator Tool', () => {
   it('should have correct metadata', () => {
     expect(calculatorTool.name).toBe('calculator');
     expect(calculatorTool.version).toBe('1.0.0');
-    expect(calculatorTool.description).toContain('数学计算');
+    expect(calculatorTool.description).toContain('calculator');
   });
 
   it('should have 4 methods', () => {
@@ -101,7 +101,7 @@ describe('Calculator Tool', () => {
 
     it('should throw error when dividing by zero', async () => {
       const method = methods.find(m => m.name === 'divide')!;
-      await expect(method.handler({ a: 10, b: 0 })).rejects.toThrow('除数不能为0');
+      await expect(method.handler({ a: 10, b: 0 })).rejects.toThrow('Division by zero');
     });
   });
 

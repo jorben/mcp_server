@@ -13,7 +13,7 @@ describe('Echo Tool', () => {
   it('should have correct metadata', () => {
     expect(echoTool.name).toBe('echo');
     expect(echoTool.version).toBe('1.0.0');
-    expect(echoTool.description).toContain('回显');
+    expect(echoTool.description).toContain('Echo');
   });
 
   it('should have 3 methods', () => {

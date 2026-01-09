@@ -2,20 +2,20 @@ import { z } from 'zod';
 import { MCPTool, MCPMethodDefinition } from '../../types/mcp.js';
 
 /**
- * Echo 工具 - 用于测试和调试
+ * Echo Tool - For testing and debugging
  */
 const echoTool: MCPTool = {
   name: 'echo',
-  description: '回显工具，用于测试和调试',
+  description: 'Echo tool for testing and debugging',
   version: '1.0.0',
 
   getMethods(): MCPMethodDefinition[] {
     return [
       {
         name: 'echo',
-        description: '回显输入的消息',
+        description: 'Echo back the input message',
         inputSchema: {
-          message: z.string().describe('要回显的消息'),
+          message: z.string().describe('Message to echo'),
         },
         handler: async (params) => {
           const { message } = params as { message: string };
@@ -24,9 +24,9 @@ const echoTool: MCPTool = {
       },
       {
         name: 'reverse',
-        description: '反转输入的字符串',
+        description: 'Reverse the input string',
         inputSchema: {
-          text: z.string().describe('要反转的文本'),
+          text: z.string().describe('Text to reverse'),
         },
         handler: async (params) => {
           const { text } = params as { text: string };
@@ -35,7 +35,7 @@ const echoTool: MCPTool = {
       },
       {
         name: 'info',
-        description: '获取服务器信息',
+        description: 'Get server information',
         inputSchema: {},
         handler: async () => {
           return {
@@ -50,7 +50,7 @@ const echoTool: MCPTool = {
   },
 
   async initialize() {
-    // 无需初始化
+    // No initialization required
   },
 
   async healthCheck() {

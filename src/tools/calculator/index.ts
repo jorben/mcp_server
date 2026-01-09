@@ -2,21 +2,21 @@ import { z } from 'zod';
 import { MCPTool, MCPMethodDefinition } from '../../types/mcp.js';
 
 /**
- * 计算器工具 - 提供基础数学运算
+ * Calculator Tool - Provides basic math operations
  */
 const calculatorTool: MCPTool = {
   name: 'calculator',
-  description: '数学计算工具，提供加减乘除等基础运算',
+  description: 'Math calculator tool providing basic arithmetic operations',
   version: '1.0.0',
 
   getMethods(): MCPMethodDefinition[] {
     return [
       {
         name: 'add',
-        description: '加法运算：计算两个数的和',
+        description: 'Addition: Calculate the sum of two numbers',
         inputSchema: {
-          a: z.number().describe('第一个数'),
-          b: z.number().describe('第二个数'),
+          a: z.number().describe('First number'),
+          b: z.number().describe('Second number'),
         },
         handler: async (params) => {
           const { a, b } = params as { a: number; b: number };
@@ -25,10 +25,10 @@ const calculatorTool: MCPTool = {
       },
       {
         name: 'subtract',
-        description: '减法运算：计算两个数的差',
+        description: 'Subtraction: Calculate the difference of two numbers',
         inputSchema: {
-          a: z.number().describe('被减数'),
-          b: z.number().describe('减数'),
+          a: z.number().describe('Minuend'),
+          b: z.number().describe('Subtrahend'),
         },
         handler: async (params) => {
           const { a, b } = params as { a: number; b: number };
@@ -37,10 +37,10 @@ const calculatorTool: MCPTool = {
       },
       {
         name: 'multiply',
-        description: '乘法运算：计算两个数的积',
+        description: 'Multiplication: Calculate the product of two numbers',
         inputSchema: {
-          a: z.number().describe('第一个数'),
-          b: z.number().describe('第二个数'),
+          a: z.number().describe('First number'),
+          b: z.number().describe('Second number'),
         },
         handler: async (params) => {
           const { a, b } = params as { a: number; b: number };
@@ -49,15 +49,15 @@ const calculatorTool: MCPTool = {
       },
       {
         name: 'divide',
-        description: '除法运算：计算两个数的商',
+        description: 'Division: Calculate the quotient of two numbers',
         inputSchema: {
-          a: z.number().describe('被除数'),
-          b: z.number().describe('除数（不能为0）'),
+          a: z.number().describe('Dividend'),
+          b: z.number().describe('Divisor (cannot be 0)'),
         },
         handler: async (params) => {
           const { a, b } = params as { a: number; b: number };
           if (b === 0) {
-            throw new Error('除数不能为0');
+            throw new Error('Division by zero is not allowed');
           }
           return { result: a / b };
         },
@@ -66,7 +66,7 @@ const calculatorTool: MCPTool = {
   },
 
   async initialize() {
-    // 无需初始化
+    // No initialization required
   },
 
   async healthCheck() {

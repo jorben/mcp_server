@@ -13,7 +13,7 @@ describe('Time Tool', () => {
   it('should have correct metadata', () => {
     expect(timeTool.name).toBe('time');
     expect(timeTool.version).toBe('1.0.0');
-    expect(timeTool.description).toContain('时间');
+    expect(timeTool.description).toContain('Time');
   });
 
   it('should have 3 methods', () => {
