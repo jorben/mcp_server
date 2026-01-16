@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { z } from 'zod';
 import { createMcpServerForTool } from './mcp-server.js';
-import { MCPTool } from '../types/mcp.js';
+import { MCPTool, MCPMethodDefinition } from '../types/mcp.js';
 
 // Mock logger
 vi.mock('../utils/logger.js', () => ({
@@ -24,11 +24,11 @@ import { toolExecutor } from '../core/tool-executor.js';
 
 // Helper to create a mock tool
 function createMockTool(overrides: Partial<MCPTool> = {}): MCPTool {
-  return {
+  const defaultTool: MCPTool = {
     name: 'test-tool',
     description: 'A test tool',
     version: '1.0.0',
-    getMethods: () => [
+    getMethods: (): MCPMethodDefinition[] => [
       {
         name: 'greet',
         description: 'Greet someone',
@@ -53,8 +53,8 @@ function createMockTool(overrides: Partial<MCPTool> = {}): MCPTool {
         },
       },
     ],
-    ...overrides,
   };
+  return { ...defaultTool, ...overrides };
 }
 
 describe('createMcpServerForTool', () => {

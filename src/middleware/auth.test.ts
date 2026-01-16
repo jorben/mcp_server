@@ -38,7 +38,10 @@ describe('authMiddleware', () => {
 
   describe('skip auth paths', () => {
     it('should skip auth for /health path', () => {
-      mockReq.path = '/health';
+      mockReq = {
+        path: '/health',
+        headers: {},
+      };
       
       authMiddleware(mockReq as Request, mockRes as Response, mockNext);
       
@@ -47,7 +50,10 @@ describe('authMiddleware', () => {
     });
 
     it('should skip auth for / root path', () => {
-      mockReq.path = '/';
+      mockReq = {
+        path: '/',
+        headers: {},
+      };
       
       authMiddleware(mockReq as Request, mockRes as Response, mockNext);
       
@@ -59,7 +65,10 @@ describe('authMiddleware', () => {
   describe('when AUTHORIZATION_KEY not configured', () => {
     it('should skip auth and call next', () => {
       delete process.env.AUTHORIZATION_KEY;
-      mockReq.path = '/api/test';
+      mockReq = {
+        path: '/api/test',
+        headers: {},
+      };
       
       authMiddleware(mockReq as Request, mockRes as Response, mockNext);
       
